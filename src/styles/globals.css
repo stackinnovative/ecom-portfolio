@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* 1. Map Tailwind Variables */
+@theme {
+  --color-theme-bg: var(--bg);
+  --color-theme-secondary: var(--bg-secondary);
+  --color-theme-text: var(--text);
+  --color-theme-muted: var(--muted);
+  --color-theme-accent: var(--accent);
+  --color-theme-card: var(--card);
+  --color-theme-footer-bg: var(--footer-bg);
+  --color-theme-footer-border: var(--footer-border);
+}
+
+/* 2. Import Client Themes */
+@import "./themes/default.css";
+
+
+/* 3. Global Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    @apply antialiased transition-colors duration-300;
+  }
+}
+
+/* 4. Global Animations */
+.theme-shimmer {
+  background: linear-gradient(
+    120deg,
+    var(--accent) 0%,
+    var(--text) 20%,
+    var(--bg) 40%,
+    var(--text) 60%,
+    var(--accent) 80%
+  );
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: themeShimmer 4s linear infinite;
+}
+
+@keyframes themeShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}

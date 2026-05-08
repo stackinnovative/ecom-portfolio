@@ -1,0 +1,23 @@
+@layer base {
+   :root {
+    --bg: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --text: #111827;
+    --muted: #6b7280;
+    --accent: #3b82f6; /* Tech Blue */
+    --card: #f9fafb;
+    --footer-bg: #121212;
+    --footer-border: rgba(255,255,255,0.08);
+  }
+
+  .dark {
+    --bg: #0b0b0b;
+    --bg-secondary: #161616;
+    --text: #f9fafb;
+    --muted: #9ca3af;
+    --accent: #60a5fa; /* Brighter Blue */
+    --card: #141414;
+    --footer-bg: #0e0e0e;
+    --footer-border: rgba(255,255,255,0.08);
+  }
+}
