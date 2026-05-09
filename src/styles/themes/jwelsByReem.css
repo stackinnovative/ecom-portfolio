@@ -1,0 +1,41 @@
+@layer base {
+  .theme-jewels-by-reem {
+    --bg: #FDFBFA;                /* Very soft, warm off-white */
+    --bg-secondary: #F6F0EE;      /* Soft warm blush beige for cards */
+    --text: #362A28;              /* Warm deep charcoal/brown */
+    --muted: #948682;             /* Dusty taupe */
+    
+    /* The dusty rose/mauve color from her logo */
+    --accent: #C69B9D;            
+    --color-theme-accent: #C69B9D;
+    
+    --card: #FFFFFF;
+    --footer-bg: #2B2120;         /* Deep warm brown/charcoal */
+    --footer-border: rgba(255,255,255,0.06);
+
+    /* Soft gold tint for icons to match the aesthetic */
+    --icon-filter: brightness(0) saturate(100%)
+      invert(66%) sepia(12%) saturate(830%)
+      hue-rotate(309deg) brightness(94%) contrast(87%);
+  }
+
+  .dark .theme-jewels-by-reem,
+  .theme-jewels-by-reem.dark {
+    --bg: #181413;                /* Very dark warm brown/black */
+    --bg-secondary: #221C1A;      /* Elevated dark background */
+    --text: #F4EBE8;              /* Soft cream text */
+    --muted: #A89B97;             /* Muted warm grey */
+    
+    /* Slightly lighter dusty rose for dark mode pop */
+    --accent: #D6AAB0;            
+    --color-theme-accent: #D6AAB0;
+    
+    --card: #1D1817;
+    --footer-bg: #0F0C0B;
+    --footer-border: rgba(255,255,255,0.05);
+
+    --icon-filter: brightness(0) saturate(100%)
+      invert(81%) sepia(13%) saturate(542%)
+      hue-rotate(304deg) brightness(97%) contrast(93%);
+  }
+}
