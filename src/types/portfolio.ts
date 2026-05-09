@@ -1,17 +1,7 @@
 export type PortfolioConfig = {
   name: string;
-  description: string;
-  location: string;
-  phone: string;
-  services: string[];
-  tagline: string;
-  heroTitle: string;
   logoText: string;
-  logoImage: string;
-  features: {
-    title: string;
-    desc: string;
-  }[];
+  logo?: string;
   navLinks: {
     label: string;
     href: string;
@@ -23,73 +13,18 @@ export type PortfolioConfig = {
     headingHighlight: string;
     description: string;
     primaryCta: string;
-    secondaryCta: string;
+    bgImage: string;
     stats: {
       label: string;
       value: string;
     }[];
   };
-  featuresSection: {
-    badge: string;
-    headingMain: string;
-    headingHighlight: string;
-    description: string;
-    items: {
-      title: string;
-      desc: string;
-      icon: string;
-    }[];
-  };
-  portfolioSection: {
-    badge: string;
-    headingMain: string;
-    headingHighlight: string;
-    description: string;
-    projects: {
-      id: number;
-      title: string;
-      category: string;
-      image: string;
-    }[];
-  };
-  aboutSection: {
-    badge: string;
-    headingMain: string;
-    headingHighlight: string;
-    description: string;
-    bentoBoxes: {
-      mainStory: {
-        title: string;
-        text: string;
-      };
-      statBox: {
-        value: string;
-        label: string;
-      };
-      features: {
-        title: string;
-        desc: string;
-        icon: string;
-      }[];
-    };
-  };
-  pricingSection: {
-    badge: string;
-    headingMain: string;
-    headingHighlight: string;
-    description: string;
-    toggleLeft: string;
-    toggleRight: string;
-    tiers: {
-      name: string;
-      description: string;
-      priceStandard: string;
-      priceBulk: string;
-      features: string[];
-      ctaText: string;
-      isPopular: boolean;
-    }[];
-  };
+  brandValues: BrandValues;
+  featuredProducts: FeaturedProducts;
+  promoBanner: PromoBanner;
+  newArrivals: NewArrivals;
+  instaGrid: InstaGrid;
+  about: AboutSection;
   testimonialsSection: {
     badge: string;
     headingMain: string;
@@ -118,4 +53,108 @@ export type PortfolioConfig = {
       href: string;
     }[];
   };
+};
+
+type BrandValueItem = {
+  title: string;
+  description: string;
+  icon: string;
+};
+
+type BrandValues = {
+  sectionLabel: string;
+  items: BrandValueItem[];
+};
+
+type FeaturedProductItem = {
+  name: string;
+  price: string;
+  originalPrice?: string;
+  badge?: string;
+  badgeColor?: string;
+  rating: number;
+  reviewCount: number;
+  image: string;
+};
+
+type FeaturedProducts = {
+  sectionLabel: string;
+  heading: string;
+  accentWordIndex: number;
+  viewAllText: string;
+  viewAllHref: string;
+  items: FeaturedProductItem[];
+};
+
+type AboutPillar = {
+  title: string;
+  body: string;
+};
+
+type AboutFloatStat = {
+  value: string;
+  label: string;
+};
+
+type AboutSection = {
+  sectionLabel: string;
+  watermark: string;
+  heading: string;
+  accentLineIndex: number;
+  description: string;
+  floatBadge: string;
+  floatStat: AboutFloatStat;
+  mainImage: string;
+  insetImage: string;
+  pillars: AboutPillar[];
+  ctaText: string;
+  ctaHref: string;
+  secondaryCtaText: string;
+  secondaryCtaHref: string;
+};
+
+type PromoBanner = {
+  badge: string;
+  heading: string;
+  accentLineIndex: number;
+  description: string;
+  countdownHours: number;
+  offerLabel: string;
+  offerSublabel: string;
+  ctaText: string;
+  ctaHref: string;
+  secondaryCtaText: string;
+  secondaryCtaHref: string;
+  bgImage: string;
+};
+
+type NewArrivalItem = {
+  name: string;
+  tag?: string;
+  image: string;
+};
+
+type NewArrivals = {
+  sectionLabel: string;
+  heading: string;
+  accentWordIndex: number;
+  subheading: string;
+  items: NewArrivalItem[];
+};
+
+type InstaGridPost = {
+  image: string;
+  likes: string;
+  comments: string;
+  span: "tall" | "normal" | "wide";
+};
+
+type InstaGrid = {
+  sectionLabel: string;
+  heading: string;
+  accentWordIndex: number;
+  handle: string;
+  profileUrl: string;
+  followText: string;
+  posts: InstaGridPost[];
 };

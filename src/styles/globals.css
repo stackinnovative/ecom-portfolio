@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./themes/default.css";
+@import "./themes/sanora.css";
 
 /* 1. Map Tailwind Variables */
 @theme {
@@ -11,9 +13,6 @@
   --color-theme-footer-bg: var(--footer-bg);
   --color-theme-footer-border: var(--footer-border);
 }
-
-/* 2. Import Client Themes */
-@import "./themes/default.css";
 
 
 /* 3. Global Base Styles */

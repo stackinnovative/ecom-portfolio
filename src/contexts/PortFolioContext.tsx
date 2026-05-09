@@ -35,10 +35,10 @@ export const PortfolioProvider = ({ children }: PortfolioProviderProps) => {
     const validKey =
       clientKey && clientKey in clientConfigs ? clientKey : "default";
 
-    document.body.className = document.body.className
+    document.documentElement.className = document.documentElement.className
       .replace(/\btheme-\S+/g, "")
       .trim();
-    document.body.classList.add(`theme-${validKey}`);
+    document.documentElement.classList.add(`theme-${validKey}`);
   }, []);
 
   return (
