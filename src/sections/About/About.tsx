@@ -1,145 +1,230 @@
 import { motion, type Variants } from "framer-motion";
-import { User, Leaf, Globe, Sparkles } from "lucide-react";
 import { usePortfolio } from "../../hooks/usePortFolio";
 
-const iconMap: Record<string, React.ElementType> = {
-  leaf: Leaf,
-  globe: Globe,
-};
-
-// Cinematic scroll animation variants
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const bentoVariants: Variants = {
-  hidden: { opacity: 0, y: 40, scale: 0.98 },
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 36 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }, // Apple-style snappy ease
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const fadeLeft: Variants = {
+  hidden: { opacity: 0, x: -48 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const stagger: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
   },
 };
 
 export const About = () => {
-const { aboutSection } = usePortfolio();
+  const { about } = usePortfolio();
+
   return (
     <section
       id="about"
-      // Alternating background: using secondary here if Portfolio used bg-theme-bg
-      className="py-24 bg-theme-secondary relative overflow-hidden"
+      className="relative bg-theme-bg py-20 md:py-32 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-16">
+      {/* Large faded heading watermark — top right */}
+      <span
+        className="absolute -top-4 right-0 text-[80px] md:text-[140px] font-black uppercase leading-none tracking-tighter select-none pointer-events-none"
+        style={{ color: "var(--text)", opacity: 0.03 }}
+      >
+        {about.watermark ?? "ABOUT"}
+      </span>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* ── LEFT: Stacked image collage ── */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-theme-bg border border-theme-muted/10 mb-6 shadow-sm"
+            className="relative flex justify-center lg:justify-start"
+            variants={fadeLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
           >
-            <User size={16} className="text-theme-accent" />
-            <span className="text-sm font-medium text-theme-text tracking-wide uppercase">
-              {aboutSection.badge}
-            </span>
-          </motion.div>
+            {/* Accent square behind images */}
+            <div
+              className="absolute -bottom-6 -left-4 w-48 h-48 md:w-64 md:h-64 rounded-3xl opacity-10"
+              style={{ background: "var(--accent)" }}
+            />
 
-          <motion.h2
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-5xl font-bold text-theme-text mb-4"
-          >
-            {aboutSection.headingMain}{" "}
-            <span className="text-theme-accent">
-              {aboutSection.headingHighlight}
-            </span>
-          </motion.h2>
+            {/* Main large image */}
+            <div className="relative w-full max-w-sm md:max-w-md">
+              <div className="rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl">
+                <img
+                  src={about.mainImage}
+                  alt="About"
+                  className="w-full h-full object-cover"
+                />
+                {/* Dark gradient at bottom of image */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              </div>
 
-          <motion.p
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg text-theme-muted"
-          >
-            {aboutSection.description}
-          </motion.p>
-        </div>
-
-        {/* BENTO BOX GRID */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {/* BOX 1: The Main Story (Spans 2 Columns) */}
-          <motion.div
-            variants={bentoVariants}
-            className="md:col-span-2 relative p-8 md:p-12 rounded-3xl bg-theme-card border border-theme-muted/10 overflow-hidden group hover:border-theme-accent/30 transition-colors duration-500 shadow-sm hover:shadow-xl hover:shadow-theme-accent/5"
-          >
-            {/* Subtle background glow effect */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-theme-accent/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
-
-            <Sparkles className="text-theme-accent mb-6" size={32} />
-            <h3 className="text-3xl font-bold text-theme-text mb-4">
-              {aboutSection.bentoBoxes.mainStory.title}
-            </h3>
-            <p className="text-lg text-theme-muted leading-relaxed max-w-2xl">
-              {aboutSection.bentoBoxes.mainStory.text}
-            </p>
-          </motion.div>
-
-          {/* BOX 2: The Highlight Stat (Spans 1 Column) */}
-          <motion.div
-            variants={bentoVariants}
-            className="md:col-span-1 p-8 md:p-12 rounded-3xl bg-theme-accent text-theme-bg flex flex-col justify-center items-center text-center group hover:scale-[1.02] transition-transform duration-500 shadow-lg shadow-theme-accent/20"
-          >
-            <span className="text-6xl md:text-7xl font-extrabold tracking-tight mb-2">
-              {aboutSection.bentoBoxes.statBox.value}
-            </span>
-            <span className="text-lg font-medium opacity-90 uppercase tracking-widest">
-              {aboutSection.bentoBoxes.statBox.label}
-            </span>
-          </motion.div>
-
-          {/* BOXES 3 & 4: Sub-features (Span 1.5 Columns each essentially, adapting to grid) */}
-          {aboutSection.bentoBoxes.features.map((feature, index) => {
-            const Icon = iconMap[feature.icon] || Sparkles;
-            // The first feature spans 1 column, the second spans 2. This creates asymmetry!
-            const gridSpanClass =
-              index === 0 ? "md:col-span-1" : "md:col-span-2";
-
-            return (
+              {/* Floating stat card — bottom left of image */}
               <motion.div
-                key={index}
-                variants={bentoVariants}
-                className={`${gridSpanClass} p-8 rounded-3xl bg-theme-card border border-theme-muted/10 hover:border-theme-accent/30 transition-colors duration-500 shadow-sm hover:shadow-xl hover:shadow-theme-accent/5`}
+                className="absolute -bottom-5 -left-4 md:-left-10 bg-theme-bg border border-theme-muted/10 rounded-2xl px-4 py-3 md:px-5 md:py-4 shadow-xl backdrop-blur-sm"
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.5,
+                  duration: 0.7,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
-                <div className="w-12 h-12 rounded-full bg-theme-bg border border-theme-muted/10 flex items-center justify-center mb-6 text-theme-accent shadow-sm">
-                  <Icon size={24} />
-                </div>
-                <h4 className="text-xl font-bold text-theme-text mb-3">
-                  {feature.title}
-                </h4>
-                <p className="text-theme-muted leading-relaxed">
-                  {feature.desc}
+                <p className="text-2xl md:text-3xl font-black text-theme-accent leading-none">
+                  {about.floatStat.value}
+                </p>
+                <p className="text-[10px] uppercase tracking-widest text-theme-muted font-bold mt-0.5">
+                  {about.floatStat.label}
                 </p>
               </motion.div>
-            );
-          })}
-        </motion.div>
+
+              {/* Floating badge card — top right of image */}
+              <motion.div
+                className="absolute -top-4 -right-4 md:-right-8 bg-theme-accent text-theme-bg rounded-2xl px-3 py-2 md:px-4 md:py-3 shadow-xl"
+                initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.6,
+                  duration: 0.7,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <p className="text-[10px] font-black uppercase tracking-widest leading-tight">
+                  {about.floatBadge ?? "Est. 2018"}
+                </p>
+              </motion.div>
+
+              {/* Small inset image — overlapping bottom right */}
+              <motion.div
+                className="absolute -bottom-10 right-0 md:-right-8 w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden border-4 border-theme-bg shadow-xl"
+                initial={{ opacity: 0, scale: 0.85 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.45,
+                  duration: 0.8,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <img
+                  src={about.insetImage}
+                  alt="About detail"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* ── RIGHT: Text content ── */}
+          <motion.div
+            className="flex flex-col mt-16 lg:mt-0"
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            {/* Label */}
+            <motion.p
+              variants={fadeUp}
+              className="text-[10px] uppercase tracking-[0.3em] font-bold text-theme-muted mb-4"
+            >
+              {about.sectionLabel}
+            </motion.p>
+
+            {/* Heading */}
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-theme-text leading-[0.9] mb-6"
+            >
+              {about.heading.split("\n").map((line, i) => (
+                <span key={i} className="block">
+                  {i === about.accentLineIndex ? (
+                    <span className="text-theme-accent">{line}</span>
+                  ) : (
+                    line
+                  )}
+                </span>
+              ))}
+            </motion.h2>
+
+            {/* Divider */}
+            <motion.div
+              variants={fadeUp}
+              className="w-12 h-[3px] rounded-full mb-6"
+              style={{ background: "var(--accent)" }}
+            />
+
+            {/* Description */}
+            <motion.p
+              variants={fadeUp}
+              className="text-sm md:text-base text-theme-muted leading-relaxed mb-8 max-w-lg"
+            >
+              {about.description}
+            </motion.p>
+
+            {/* Milestones / pillars row */}
+            <motion.div
+              variants={stagger}
+              className="grid grid-cols-2 gap-4 mb-10"
+            >
+              {about.pillars.map((p, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  className="flex items-start gap-3 p-4 rounded-2xl border border-theme-muted/10 bg-theme-secondary/30"
+                >
+                  <span
+                    className="mt-0.5 w-2 h-2 rounded-full shrink-0"
+                    style={{ background: "var(--accent)" }}
+                  />
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-wider text-theme-text mb-0.5">
+                      {p.title}
+                    </p>
+                    <p className="text-[11px] text-theme-muted leading-snug">
+                      {p.body}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* CTA row */}
+            <motion.div variants={fadeUp} className="flex items-center gap-4">
+              <a
+                href={about.ctaHref ?? "#contact"}
+                className="px-7 py-3.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all hover:scale-105 hover:shadow-lg"
+                style={{
+                  background: "var(--accent)",
+                  color: "var(--bg)",
+                  boxShadow: "0 0 0 0 var(--accent)",
+                }}
+              >
+                {about.ctaText}
+              </a>
+              <a
+                href={about.secondaryCtaHref ?? "#portfolio"}
+                className="text-[11px] font-black uppercase tracking-widest text-theme-muted hover:text-theme-accent transition-colors underline underline-offset-4"
+              >
+                {about.secondaryCtaText ?? "See Our Work"}
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

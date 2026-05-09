@@ -1,0 +1,32 @@
+@layer base {
+  .theme-sanora {
+    --bg: #F8F2EB;                 /* warm ivory */
+    --bg-secondary: #EFE6DC;      /* sand */
+    --text: #2A211C;              /* espresso brown */
+    --muted: #8B7B6E;             /* taupe */
+    --accent: #B99268;            /* muted champagne gold */
+    --card: #FFFDFC;
+    --footer-bg: #1B1613;         /* luxury dark brown */
+    --footer-border: rgba(255,255,255,0.06);
+
+    --icon-filter: brightness(0) saturate(100%)
+      invert(13%) sepia(10%) saturate(900%)
+      hue-rotate(345deg) brightness(95%) contrast(90%);
+  }
+
+  .dark .theme-sanora,
+  .theme-sanora.dark {
+    --bg: #14110F;                /* rich dark mocha */
+    --bg-secondary: #1E1A17;      /* espresso */
+    --text: #F7F1EB;              /* warm cream */
+    --muted: #A79A8D;             /* muted warm gray */
+    --accent: #D2AA7D;            /* champagne gold */
+    --card: #181412;
+    --footer-bg: #0D0B0A;
+    --footer-border: rgba(255,255,255,0.05);
+
+    --icon-filter: brightness(0) saturate(100%)
+      invert(94%) sepia(6%) saturate(180%)
+      hue-rotate(340deg) brightness(103%) contrast(96%);
+  }
+}
