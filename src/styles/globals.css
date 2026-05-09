@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./themes/default.css";
 @import "./themes/sanora.css";
+@import "./themes/jwelsByReem.css";
 
 /* 1. Map Tailwind Variables */
 @theme {
