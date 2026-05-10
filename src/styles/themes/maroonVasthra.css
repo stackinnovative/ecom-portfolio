@@ -1,0 +1,52 @@
+@layer base {
+  .theme-maroonvastra {
+    /* MAIN BACKGROUNDS */
+    --bg: #FAF7F2;                 /* warm luxury ivory */
+    --bg-secondary: #F3ECE3;      /* soft cream beige */
+
+    /* TEXT COLORS */
+    --text: #2B161B;              /* rich maroon-brown */
+    --muted: #8A7470;             /* dusty neutral */
+
+    /* BRAND COLORS */
+    --accent: #8B1E34;            /* logo maroon */
+    --card: #FFFDFC;
+
+    /* FOOTER */
+    --footer-bg: #4A0F18;         /* deep wine */
+    --footer-border: rgba(255,255,255,0.08);
+
+    /* GOLD ICON TONE */
+    --icon-filter: brightness(0) saturate(100%)
+      invert(18%) sepia(38%) saturate(2224%)
+      hue-rotate(330deg) brightness(92%) contrast(95%);
+
+
+  }
+
+  .dark .theme-maroonvastra,
+  .theme-maroonvastra.dark {
+
+    /* DARK LUXURY BACKGROUNDS */
+    --bg: #0F0507;                /* elegant wine black */
+    --bg-secondary: #1A0B0E;      /* deep maroon-black */
+
+    /* TEXT */
+    --text: #F8F2EC;              /* warm white */
+    --muted: #B69A92;             /* dusty rose beige */
+
+    /* ACCENT */
+    --accent: #D4B24C;            /* luxury gold accent */
+    --card: #18080B;
+
+    /* FOOTER */
+    --footer-bg: #070203;
+    --footer-border: rgba(255,255,255,0.05);
+
+    /* GOLD ICONS */
+    --icon-filter: brightness(0) saturate(100%)
+      invert(78%) sepia(24%) saturate(820%)
+      hue-rotate(356deg) brightness(96%) contrast(91%);
+
+  }
+}

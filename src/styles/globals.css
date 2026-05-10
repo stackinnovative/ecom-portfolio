@@ -2,6 +2,9 @@
 @import "./themes/default.css";
 @import "./themes/sanora.css";
 @import "./themes/jwelsByReem.css";
+@import "./themes/lumea.css";
+@import "./themes/maroonVasthra.css";
+
 
 /* 1. Map Tailwind Variables */
 @theme {

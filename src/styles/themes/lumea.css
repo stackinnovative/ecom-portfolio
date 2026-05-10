@@ -1,0 +1,33 @@
+@layer base {
+  .theme-lumea {
+    --bg: #FFFFFF;                 /* clean white */
+    --bg-secondary: #F9F5F6;      /* very light blush/grey */
+    --text: #1A1A1A;              /* soft black */
+    --muted: #6B5E5E;             /* dusty mauve/brown */
+    --accent: #500818;            /* deep Lumea maroon */
+    --card: #FFFFFF;
+    --footer-bg: #500818;         /* brand maroon */
+    --footer-border: rgba(255,255,255,0.1);
+
+    /* Filter to turn icons into the brand maroon color */
+    --icon-filter: brightness(0) saturate(100%) 
+      invert(9%) sepia(56%) saturate(4973%) 
+      hue-rotate(336deg) brightness(89%) contrast(106%);
+  }
+
+  .dark .theme-lumea,
+  .theme-lumea.dark {
+    --bg: #120205;                /* deep dark wine */
+    --bg-secondary: #1C0509;      /* darker maroon */
+    --text: #FDF8F9;              /* off-white */
+    --muted: #A38B8E;             /* muted rose gray */
+    --accent: #D4A5A9;            /* dusty rose gold */
+    --card: #1A0407;
+    --footer-bg: #0A0102;
+    --footer-border: rgba(255,255,255,0.05);
+
+    --icon-filter: brightness(0) saturate(100%) 
+      invert(85%) sepia(12%) saturate(600%) 
+      hue-rotate(310deg) brightness(95%) contrast(90%);
+  }
+}
